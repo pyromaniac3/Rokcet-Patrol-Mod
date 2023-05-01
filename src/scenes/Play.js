@@ -12,6 +12,8 @@ class Play extends Phaser.Scene{
         this.load.image('moon', './assets/moon.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        // load texture atlus
+        this.load.atlas('spaceshipSuperSpeed', './assets/spaceship.png', './assets/spaceship.json')
     }
 
     create(){
@@ -55,6 +57,18 @@ class Play extends Phaser.Scene{
             frameRate: 30
         });
 
+        // superspeed animation
+        this.anims.create({
+            key: 'superSpeed',
+            frames: this.anims.generateFrameNumbers('spaceshipSuperSpeed', { 
+                prefix: "spaceship",
+                suffic: ".png",
+                start: 0, 
+                end: 5, 
+                first: 0
+            }),
+        });
+
         // initialize score
         this.p1Score = 0;
        // let remainingTime = 60;
@@ -90,12 +104,22 @@ class Play extends Phaser.Scene{
         }, null, this);
 
         // creating a dealyed call to move the ships fast after 30 seconds
-        this.timer = this.time.delayedCall(30000, () => {
+        this.timer = this.time.delayedCall(10000, () => {
             this.ship01.moveSpeed = 6;
+            let ship01anim = this.add.sprite(ship01.x, ship01.y, 'spaceshipSuperSpeed').setOrigin(0, 0);
+            ship01anim.play("superSpeed");
+
             this.ship02.moveSpeed = 6;
+            let ship02anim = this.add.sprite(ship02.x, ship02.y, 'spaceshipSuperSpeed').setOrigin(0, 0);
+            ship02anim.play("superSpeed");
+
             this.ship03.moveSpeed = 6;
+            let ship03anim = this.add.sprite(ship03.x, ship03.y, 'spaceshipSuperSpeed').setOrigin(0, 0);
+            ship03anim.play("superSpeed");
+
             this.smaller.moveSpeed = 10;
             this.smaller02.moveSpeed = 10;
+        
         }, null, this);
 
         if(expert == true){

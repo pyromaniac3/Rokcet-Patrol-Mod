@@ -13,6 +13,7 @@
         Parallax Scrolling
         Create a new Title
        ** Display time remaining in seconds on screen
+       create a new animated sprite for spaceships enemies
     15pt Tier:
         Create a new Spaceship type that is smaller, faster, and worth more points
        ** Implement mouse control for player movement and mouse click to fire
